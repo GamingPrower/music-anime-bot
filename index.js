@@ -7,7 +7,7 @@ const port = process.env.PORT || 3000;
 http.createServer().listen(port);
 
 const bot = new Commando.Client({
-	commandPrefix: settings.PREFIX,
+	commandPrefix: process.env.PREFIX,
 	disableEveryone: true,
 	unknownCommandResponse: false
 });
@@ -32,7 +32,7 @@ bot.on('ready', () => {
 });
 
 bot.on('guildCreate', guild => {
-	guild.owner.send(`Thanks for adding the bot! You can type ${settings.PREFIX}help for a list of commands.`);
+	guild.owner.send(`Thanks for adding the bot! You can type ${process.env.PREFIX}help for a list of commands.`);
 });
 
 bot.on('guildDelete', guild => {
@@ -40,7 +40,7 @@ bot.on('guildDelete', guild => {
 });
 
 bot.on('message', message => {
-	if (message.content.startsWith(`${settings.PREFIX}leave`) && message.guild.voiceConnection) {
+	if (message.content.startsWith(`${process.env.PREFIX}leave`) && message.guild.voiceConnection) {
 		message.guild.voiceConnection.disconnect();
 		servers[message.guild.id].queue = [];
 		console.log(`${servers[message.guild.id]}: Queue Cleared`);
@@ -48,7 +48,7 @@ bot.on('message', message => {
 });
 
 bot.on('message', message => {
-	if (message.content.startsWith(`${settings.PREFIX}skip`) && servers[message.guild.id].queue) message.guild.voiceConnection.dispatcher.end();
+	if (message.content.startsWith(`${process.env.PREFIX}skip`) && servers[message.guild.id].queue) message.guild.voiceConnection.dispatcher.end();
 });
 
 bot.on('error', err => {
