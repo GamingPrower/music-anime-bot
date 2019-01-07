@@ -1,6 +1,5 @@
 const path = require('path');
 const Commando = require('discord.js-commando');
-const settings = require(path.join(__dirname, '/settings.json'));
 require('dotenv/config');
 const http = require('http');
 const port = process.env.PORT || 3000;
