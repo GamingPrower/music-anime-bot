@@ -16,7 +16,7 @@ bot.registry.registerGroup('mal', 'MyAnimeList');
 bot.registry.registerDefaults();
 bot.registry.registerCommandsIn(path.join(__dirname, '/commands'));
 
-global.servers = {}; /* global servers */
+global.servers = {}; /* global servers, currentSong */
 global.currentSong = {};
 
 bot.on('guildMemberAdd', member => {
@@ -42,12 +42,17 @@ bot.on('message', message => {
 	if (message.content.startsWith(`${process.env.PREFIX}leave`) && message.guild.voiceConnection) {
 		message.guild.voiceConnection.disconnect();
 		servers[message.guild.id].queue = [];
-		console.log(`${servers[message.guild.id]}: Queue Cleared`);
+		console.log(`${message.guild.id}: Queue Cleared`);
 	}
 });
 
 bot.on('message', message => {
-	if (message.content.startsWith(`${process.env.PREFIX}skip`) && servers[message.guild.id].queue) message.guild.voiceConnection.dispatcher.end();
+	if (message.content.startsWith(`${process.env.PREFIX}skip`) && servers[message.guild.id].queue[0]) {
+		message.reply(`Song Skipped! Now Playing: **${currentSong[message.guild.id].title[0]}**`);
+		message.guild.voiceConnection.dispatcher.end();
+	} else if (message.content.startsWith(`${process.env.PREFIX}skip`) && !servers[message.guild.id].queue[0]) {
+		message.guild.voiceConnection.dispatcher.end();
+	}
 });
 
 bot.on('error', err => {
@@ -55,4 +60,3 @@ bot.on('error', err => {
 });
 
 bot.login(process.env.TOKEN);
-

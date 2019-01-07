@@ -18,7 +18,7 @@ class CurrentSongCommand extends Commando.Command {
 			const songInfo = await YTDL.getInfo(currentSong[message.guild.id].queue[0]); /* global currentSong */
 			const ytEmbed = new Discord.RichEmbed()
 				.setTitle(songInfo.title)
-				.setDescription(songInfo.description.substr(0, 500))
+				.setDescription(`${songInfo.description.substr(0, 1000)}...`)
 				.setThumbnail(songInfo.thumbnail_url)
 				.setColor(0x000000)
 				.setURL(songInfo.video_url)
