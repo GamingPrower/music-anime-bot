@@ -12,6 +12,7 @@ function play(connection, message) {
 	server.queue.shift();
 	server.dispatcher.on('end', () => {
 		if (server.queue[0]) {
+			currentSong[message.guild.id] = { queue: [server.queue[0]], title: [server.title[0]] };
 			play(connection, message);
 		} else {
 			message.channel.send('No more songs in queue. Disconnecting.');
@@ -58,7 +59,7 @@ class MusicPlayer extends Commando.Command {
 					const server = servers[message.guild.id];
 					server.title.push(result[0].title);
 					server.queue.push(`https://www.youtube.com/watch?v=${result[0].id}`);
-					currentSong[message.guild.id] = { queue: [server.queue[0]], title: [server.title[0]] };
+					// currentSong[message.guild.id] = { queue: [server.queue[0]], title: [server.title[0]] };
 					message.reply(`**${result[0].title}** has been added to the queue!`);
 				})
 				.catch(console.error);
