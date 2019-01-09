@@ -6,7 +6,7 @@ const Youtube = require('simple-youtube-api');
 const youtube = new Youtube(process.env.YOUTUBE);
 
 function play(connection, message) {
-	const server = servers[message.guild.id]; /* global servers, currentSong*/	
+	const server = servers[message.guild.id]; /* global servers, currentSong*/
 	server.dispatcher = connection.playStream(ytdl(server.queue[0], { filter: 'audioonly' }));
 	server.title.shift();
 	server.queue.shift();
