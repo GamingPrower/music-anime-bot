@@ -21,7 +21,7 @@ global.currentSong = {};
 
 bot.on('guildMemberAdd', member => {
 	member.send('Welcome to the server');
-	const memberRole = member.guild.roles.find(channel => channel.name === 'The Collective');
+	const memberRole = member.guild.roles.find(channel => channel.name === 'Overwhelmingly Average');
 	member.addRole(memberRole);
 });
 
