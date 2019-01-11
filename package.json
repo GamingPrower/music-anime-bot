@@ -12,6 +12,7 @@
     "discord.js": "github:GamingPrower/discord.js#11.4-dev",
     "discord.js-commando": "^0.10.0",
     "dotenv": "^6.2.0",
+    "es6-promise": "^4.2.5",
     "ffmpeg-binaries": "^3.2.2-3",
     "mal-scraper": "^2.4.5",
     "masterani-scraper": "^0.1.1",
