@@ -11,6 +11,7 @@ const bot = new Commando.Client({
 	unknownCommandResponse: false
 });
 
+bot.registry.registerGroup('img', 'Image');
 bot.registry.registerGroup('music', 'Music');
 bot.registry.registerGroup('mal', 'MyAnimeList');
 bot.registry.registerDefaults();
